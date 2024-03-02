@@ -1,1 +1,4 @@
 # FridayProject5
+Friday Project 5
+
+The provided Python code is designed for a simple Quiz Bowl application where questions and answers are stored in an SQLite database. The create_quizbowl_database function initializes the database by creating two tables, 'Categories' and 'Questions,' and inserts sample categories (e.g., 'Science', 'History') and associated questions with correct answers. In the display_questions function, existing questions from the database are fetched and displayed to the user. For each question, the user is prompted to input their answer. The code compares the user's input to the correct answer, increments the score for correct responses, and provides feedback to the user. After all questions are answered, the user's final score is displayed. The main program section calls the functions to set up the database and display the questions, offering an interactive Quiz Bowl experience for users with pre-existing questions in the database.
