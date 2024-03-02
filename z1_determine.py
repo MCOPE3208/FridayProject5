@@ -1,28 +1,33 @@
 import sqlite3
 
-def get_table_names(FridayProj5):
-    try:
-        # Connect to the database
-        connection = sqlite3.connect(FridayProj5)
-        cursor = connection.cursor()
+def get_tables_and_columns(database_path):
+    connection = sqlite3.connect(database_path)
+    cursor = connection.cursor()
 
-        # Execute a query to get the table names
-        cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
-        table_names = cursor.fetchall()
+    # Get table names
+    cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
+    tables = cursor.fetchall()
 
-        # Print the table names
-        print("Table Names:")
-        for name in table_names:
-            print(name[0])
+    if tables:
+        for table in tables:
+            table_name = table[0]
+            print(f"\nTable Name: {table_name}")
 
-    except sqlite3.Error as e:
-        print(f"Error: {e}")
+            # Get column names for each table
+            cursor.execute(f"PRAGMA table_info({table_name});")
+            columns = cursor.fetchall()
 
-    finally:
-        # Close the connection
-        if connection:
-            connection.close()
+            if columns:
+                column_names = [column[1] for column in columns]
+                print(f"Column Names: {', '.join(column_names)}")
+            else:
+                print(f"No columns found in the table {table_name}.")
 
-# Replace 'your_database.db' with the path to your database file
+    else:
+        print("No tables found in the database.")
+
+    connection.close()
+
+# Replace 'your_database.db' with the actual path to your SQLite database file
 database_path = 'FridayProj5.db'
-get_table_names(database_path)
+get_tables_and_columns(database_path)
