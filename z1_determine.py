@@ -28,6 +28,6 @@ def get_tables_and_columns(database_path):
 
     connection.close()
 
-# Replace 'your_database.db' with the actual path to your SQLite database file
+
 database_path = 'FridayProj5.db'
 get_tables_and_columns(database_path)
